@@ -1,7 +1,6 @@
+## Daily standups: 10:00am
 
-Daily standups: 10:00am
-
-Daily retros: 4:30pm
+## Daily retros: 4:30pm
 ---
 User stories
 ```
