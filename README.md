@@ -68,3 +68,7 @@ As a user who owns a space
 So that users can hire my space
 I want the space to be shown as available until the booking is confirmed
 ```
+
+#### Database Instructions
+1. CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(60) UNIQUE, password VARCHAR(15), email VARCHAR(60) UNIQUE));
+2. For test: CREATE TABLE users(id SERIAL PRIMARY KEY, username VARCHAR(60) UNIQUE, password VARCHAR(15), email VARCHAR(60) UNIQUE));
