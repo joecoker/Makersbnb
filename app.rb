@@ -1,5 +1,5 @@
 require 'sinatra/base'
-require 'user'
+require './lib/user'
 
 class Makersbnb < Sinatra::Base
   get '/' do
