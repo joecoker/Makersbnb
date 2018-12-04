@@ -33,3 +33,4 @@
 - space (FK -> spaces::id)
 - hirer (FK -> users::id)
 - comment_text
+- commenter (FK -> user::id) (MVP only)
