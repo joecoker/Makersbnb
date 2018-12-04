@@ -7,4 +7,12 @@ class Makersbnb < Sinatra::Base
     erb :homepage
   end
 
+  post '/user_signup' do
+    @user = User.create_account(params[:username], params[:email], params[:password])
+    redirect '/spaces'
+  end
+
+
+
+
 end

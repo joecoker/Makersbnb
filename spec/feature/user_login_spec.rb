@@ -6,8 +6,6 @@ feature 'login to MakersBnB' do
     fill_in('password', with: 'password')
     click_button('Submit')
 
-    expect(page).to have_content "Wolverine"
-    expect(page).to have_content "Xmen@gmail.com"
-    expect(page).to have_content "password"
+    expect(page).to have_content "Spaces"
   end
 end
