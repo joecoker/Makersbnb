@@ -18,4 +18,13 @@ class Makersbnb < Sinatra::Base
     erb :spaces
   end
 
+  get '/space_profile/:id' do
+    erb :space_profile
+  end
+
+  post '/create_comment' do
+
+    redirect '/space_profile/:id'
+  end
+
 end
