@@ -3,7 +3,11 @@
 <body>
 <h1>Spaces</h1>
 <% @all_spaces.each do |space| %>
-  <li><%= space.spacename %></li>
+  <li>
+    <a href='/space_profile/<%= space.id %>'>
+      <%= space.spacename %>
+    </a>
+  </li>
 <% end %>
 
 </body>
