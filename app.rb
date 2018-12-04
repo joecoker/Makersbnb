@@ -5,12 +5,26 @@ require './lib/comments'
 require_relative './database_connection_setup'
 
 class Makersbnb < Sinatra::Base
+  enable :sessions
+
   get '/' do
     erb :homepage
   end
 
   post '/user_signup' do
-    @user = User.create_account(params[:username], params[:email], params[:password])
+    session['user'] = User.create_account(
+      username: params[:username],
+      email: params[:email],
+      password: params[:password]
+    )
+    redirect '/spaces'
+  end
+
+  post '/user_login' do
+    session['user'] = User.login(
+      username: params[:login_username],
+      password: params[:login_password]
+    )
     redirect '/spaces'
   end
 
@@ -30,6 +44,7 @@ class Makersbnb < Sinatra::Base
   end
 
   get '/create-a-space' do
+    @user = session['user']
     erb :create_space
   end
 

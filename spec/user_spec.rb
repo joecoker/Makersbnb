@@ -2,14 +2,14 @@ require 'user'
 require 'pg'
 
 describe User do
-
   context 'create_account' do
     it "will create an account for a user with a username and a password" do
-
-      user = User.create_account("Wolverine", "Xmen@gmail.com", "password")
-
+      user = User.create_account(
+        username: "Wolverine",
+        email: "Xmen@gmail.com",
+        password: "password"
+      )
       expect(user.username).to eq("Wolverine")
-
    end
   end
 
@@ -17,6 +17,16 @@ describe User do
     it 'returns the id associated with the given username' do
       id = User.get_user_id(username: DEFAULT_USER[:username])
       expect(id).to eq DEFAULT_USER[:id]
+    end
+  end
+
+  context '#login' do
+    it 'returns the user identified by username and password' do
+      user = User.login(
+        username: DEFAULT_USER[:username],
+        password: DEFAULT_USER[:password]
+      )
+      expect(user.username).to eq(DEFAULT_USER[:username])
     end
   end
 end

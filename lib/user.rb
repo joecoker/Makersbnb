@@ -4,24 +4,35 @@ class User
 
 attr_reader :username, :email, :userid #:password
 
-  def initialize (username, email, userid)
+  def initialize (username:, email:, userid:)
     @username = username
     @email = email
     @userid = userid
     # @password = password
   end
 
-  def self.create_account(username, email, password)
-    if ENV['RACK_ENV'] == 'test'
-      connection = PG.connect(dbname: 'makersbnb_test')
-    else
-      connection = PG.connect(dbname: 'makersbnb')
-    end
+  def self.create_account(username:, email:, password:)
+    result = DatabaseConnection.query "INSERT
+      INTO users (username, email, password)
+      VALUES ('#{username}', '#{email}', '#{password}')
+      RETURNING username, email, id;"
 
-    result = connection.exec("INSERT INTO users (username, email, password) VALUES ('#{username}', '#{email}', '#{password}') RETURNING username, email, id;")
+    User.new(
+      username: result[0]['username'],
+      email: result[0]['email'],
+      userid: result[0]['id']
+    )
+  end
 
-    User.new(result[0]['username'], result[0]['email'], result[0]['id'])
+  def self.login(username:, password:)
+    result = DatabaseConnection.query "SELECT * FROM users
+      WHERE username='#{username}' AND password='#{password}'"
 
+    User.new(
+      username: result[0]['username'],
+      email: result[0]['email'],
+      userid: result[0]['id']
+    )
   end
 
   def self.get_user_id(username:)
