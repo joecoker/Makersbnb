@@ -1,7 +1,6 @@
 describe 'Space' do
 
   context '#list_spaces' do
-
     it 'returns a list of the spaces object with id numbers' do
       list_of_spaces = Space.list_spaces
 
@@ -9,14 +8,11 @@ describe 'Space' do
       expect(list_of_spaces[0]).to be_a Space
       expect(list_of_spaces[0].id).to eq("1")
       expect(list_of_spaces[0].spacename).to eq("Pickle Place")
-
     end
-
   end
 
   context '#create_space' do
     it 'adds the space to the database' do
-
       Space.create_space(
         spacename: 'My House',
         ownerid: DEFAULT_USER[:id]
@@ -27,8 +23,6 @@ describe 'Space' do
         space.spacename == 'My House'
       }
       expect(my_house).not_to be nil
-
-
     end
   end
 end
