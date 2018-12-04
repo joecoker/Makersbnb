@@ -27,3 +27,9 @@
 - space (FK -> spaces::id)
 - date
 - unavailable
+
+#### Table name: comments
+- id (PK)
+- space (FK -> spaces::id)
+- hirer (FK -> users::id)
+- comment_text
