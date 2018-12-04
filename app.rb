@@ -7,7 +7,4 @@ class Makersbnb < Sinatra::Base
     erb :homepage
   end
 
-  post '/' do
-    
-  end
 end
