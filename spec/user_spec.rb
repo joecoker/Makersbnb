@@ -12,4 +12,11 @@ describe User do
 
    end
   end
+
+  context '#get_user_id' do
+    it 'returns the id associated with the given username' do
+      id = User.get_user_id(username: DEFAULT_USER[:username])
+      expect(id).to eq DEFAULT_USER[:id]
+    end
+  end
 end

@@ -18,4 +18,16 @@ class Makersbnb < Sinatra::Base
     erb :spaces
   end
 
+  get '/create-a-space' do
+    erb :create_space
+  end
+
+  post '/add-space' do
+    id = User.get_user_id(username: params[:username])
+    Space.create_space(
+      ownerid: id,
+      spacename: params[:space_name]
+    )
+    redirect '/spaces'
+  end
 end
