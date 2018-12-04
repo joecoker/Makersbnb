@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require './lib/user'
 require './lib/space'
+require_relative './database_connection_setup'
 
 class Makersbnb < Sinatra::Base
   get '/' do
@@ -12,7 +13,9 @@ class Makersbnb < Sinatra::Base
     redirect '/spaces'
   end
 
-
-
+  get '/spaces' do
+    @all_spaces = Space.list_spaces
+    erb :spaces
+  end
 
 end
