@@ -17,7 +17,16 @@ class Makersbnb < Sinatra::Base
     @all_spaces = Space.list_spaces
     erb :spaces
   end
+  
+  get '/space_profile/:id' do
+    erb :space_profile
+  end
 
+  post '/create_comment' do
+
+    redirect '/space_profile/:id'
+  end
+  
   get '/create-a-space' do
     erb :create_space
   end
@@ -30,4 +39,5 @@ class Makersbnb < Sinatra::Base
     )
     redirect '/spaces'
   end
+
 end
