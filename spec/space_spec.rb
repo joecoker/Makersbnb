@@ -1,18 +1,28 @@
 describe 'Space' do
+
   context '#list_spaces' do
-    it 'returns a list of the spaces in the database' do
-      expect(Space.list_spaces).to include DEFAULT_SPACE[:spacename]
+    it 'returns a list of the spaces object with id numbers' do
+      list_of_spaces = Space.list_spaces
+
+      expect(list_of_spaces.length).to eq 1
+      expect(list_of_spaces[0]).to be_a Space
+      expect(list_of_spaces[0].id).to eq("1")
+      expect(list_of_spaces[0].spacename).to eq("Pickle Place")
     end
   end
 
   context '#create_space' do
     it 'adds the space to the database' do
-      connection = PG.connect :dbname => 'makersbnb_test'
       Space.create_space(
         spacename: 'My House',
         ownerid: DEFAULT_USER[:id]
       )
-      expect(Space.list_spaces). to include 'My House'
+
+      list_of_spaces = Space.list_spaces
+      my_house = list_of_spaces.find { |space|
+        space.spacename == 'My House'
+      }
+      expect(my_house).not_to be nil
     end
   end
 end
