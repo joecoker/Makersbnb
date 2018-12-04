@@ -19,6 +19,14 @@ class Makersbnb < Sinatra::Base
     redirect '/spaces'
   end
 
+  post '/user_login' do
+    session['user'] = User.login(
+      username: params[:login_username],
+      password: params[:login_password]
+    )
+    redirect '/spaces'
+  end
+
   get '/spaces' do
     @all_spaces = Space.list_spaces
     erb :spaces

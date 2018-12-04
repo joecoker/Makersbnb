@@ -19,4 +19,14 @@ describe User do
       expect(id).to eq DEFAULT_USER[:id]
     end
   end
+
+  context '#login' do
+    it 'returns the user identified by username and password' do
+      user = User.login(
+        username: DEFAULT_USER[:username],
+        password: DEFAULT_USER[:password]
+      )
+      expect(user.username).to eq(DEFAULT_USER[:username])
+    end
+  end
 end
