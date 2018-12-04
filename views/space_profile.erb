@@ -27,12 +27,12 @@
     <div class="comments-list">
       Previous comments
       <ul>
-          <%# <% @comments.each do |comment| %>
+          <% @comments.each do |comment| %>
           <li>
-            <%# <%= comment.content %>
-            <%# <%=comment.timestamp%>
+            <%= comment[:comment_text] %>
+            <%="Made by " + comment[:username]%>
           </li>
-          <%# <% end %>
+          <% end %>
         </ul>
     </div>
 

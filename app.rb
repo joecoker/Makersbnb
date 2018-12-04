@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require './lib/user'
 require './lib/space'
-require './lib/comment'
+require './lib/comments'
 require_relative './database_connection_setup'
 
 class Makersbnb < Sinatra::Base
@@ -18,8 +18,9 @@ class Makersbnb < Sinatra::Base
     @all_spaces = Space.list_spaces
     erb :spaces
   end
-  
+
   get '/space_profile/:id' do
+    @comments = Comment.show_comments_by_space(params[:id])
     erb :space_profile
   end
 
@@ -27,7 +28,7 @@ class Makersbnb < Sinatra::Base
 
     redirect '/space_profile/:id'
   end
-  
+
   get '/create-a-space' do
     erb :create_space
   end
