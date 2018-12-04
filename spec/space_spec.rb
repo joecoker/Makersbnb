@@ -8,10 +8,10 @@ describe 'Space' do
   context '#create_space' do
     it 'adds the space to the database' do
       connection = PG.connect :dbname => 'makersbnb_test'
-      default_user_record = connection.exec "SELECT * FROM users
-        WHERE username = '#{DEFAULT_USER[:username]}';"
-      owner_id = default_user_record[0]['id']
-      Space.create_space(spacename: 'My House', ownerid: owner_id)
+      Space.create_space(
+        spacename: 'My House',
+        ownerid: DEFAULT_USER[:id]
+      )
       expect(Space.list_spaces). to include 'My House'
     end
   end

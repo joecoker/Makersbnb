@@ -24,4 +24,9 @@ attr_reader :username, :email, :userid #:password
 
   end
 
+  def self.get_user_id(username:)
+    query_result = DatabaseConnection.query "SELECT id FROM users
+      WHERE username='#{username}'"
+    query_result[0]['id'].to_i
+  end
 end
