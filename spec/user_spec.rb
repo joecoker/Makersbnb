@@ -10,7 +10,7 @@ describe User do
         password: "password"
       )
       expect(user.username).to eq("Wolverine")
-   end
+    end
   end
 
   context '#get_user_id' do

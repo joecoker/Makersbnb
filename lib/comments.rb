@@ -1,7 +1,7 @@
 class Comment
   attr_reader :id, :userid, :spaceid, :comment_text
 
-  def initialize(id, userid, spaceid, comment_text)
+  def initialize(id:, userid:, spaceid:, comment_text:)
     @id = id
     @userid = userid
     @spaceid = spaceid
@@ -15,10 +15,10 @@ class Comment
       RETURNING id, commenter, space, comment_text;"
     )
     Comment.new(
-      result[0]['id'],
-      result[0]['userid'],
-      result[0]['spaceid'],
-      result[0]['comment_text']
+      id: result[0]['id'],
+      userid: result[0]['userid'],
+      spaceid: result[0]['spaceid'],
+      comment_text: result[0]['comment_text']
     )
   end
 
@@ -30,7 +30,7 @@ class Comment
       WHERE comments.space = #{spaceid};"
     )
     result.map do |comment|
-      {comment_text: comment['comment_text'], username: comment['username']}
+      { comment_text: comment['comment_text'], username: comment['username'] }
     end
   end
 

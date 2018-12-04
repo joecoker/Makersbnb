@@ -21,10 +21,9 @@ class Space
       INTO spaces (spacename, owner)
       VALUES ('#{spacename}', '#{ownerid}')
       RETURNING spacename, id;"
-
-      Space.new(
-        id: result[0]['id'],
-        spacename: result[0]['spacename']
-      )
+    Space.new(
+      id: result[0]['id'],
+      spacename: result[0]['spacename']
+    )
   end
 end

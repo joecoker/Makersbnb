@@ -1,10 +1,9 @@
 require 'pg'
 
 class User
+  attr_reader :username, :email, :userid #:password
 
-attr_reader :username, :email, :userid #:password
-
-  def initialize (username:, email:, userid:)
+  def initialize(username:, email:, userid:)
     @username = username
     @email = email
     @userid = userid
@@ -16,7 +15,6 @@ attr_reader :username, :email, :userid #:password
       INTO users (username, email, password)
       VALUES ('#{username}', '#{email}', '#{password}')
       RETURNING username, email, id;"
-
     User.new(
       username: result[0]['username'],
       email: result[0]['email'],
@@ -27,7 +25,6 @@ attr_reader :username, :email, :userid #:password
   def self.login(username:, password:)
     result = DatabaseConnection.query "SELECT * FROM users
       WHERE username='#{username}' AND password='#{password}'"
-
     User.new(
       username: result[0]['username'],
       email: result[0]['email'],
