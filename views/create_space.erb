@@ -10,5 +10,8 @@
     <input type='text' name='username' placeholder='Username'>
     <input type='submit' value='Publish my space'>
   </form>
+  <% if @user %>
+    <p>You are logged in as: <%= @user.username %></p>
+  <% end %>
 </body>
 </html>
