@@ -5,4 +5,9 @@ class Space
       record['spacename']
     end
   end
+
+  def self.create_space(spacename:, ownerid:)
+    DatabaseConnection.query "INSERT INTO spaces (spacename, owner)
+      VALUES ('#{spacename}', '#{ownerid}')"
+  end
 end

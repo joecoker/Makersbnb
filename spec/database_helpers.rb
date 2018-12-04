@@ -1,5 +1,5 @@
-DEFAULT_USER = {username: 'Adam', email: "test@test.com", password: "password101"}
-DEFAULT_SPACE = {spacename: 'Pickle Place'}
+DEFAULT_USER = {id: 1, username: 'Adam'}
+DEFAULT_SPACE = {id: 1, spacename: 'Pickle Place'}
 
 def set_up_database
   clear_database
@@ -8,20 +8,16 @@ end
 
 def clear_database
   connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "TRUNCATE TABLE spaces, users"
+  connection.exec "TRUNCATE TABLE spaces, users, comments"
 end
 
 def populate_database
   connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "INSERT INTO users (username, email, password)
-    VALUES ('#{DEFAULT_USER[:username]}', '#{DEFAULT_USER[:email]}', '#{DEFAULT_USER[:password]}');"
-
-  default_user_record = connection.exec "SELECT * FROM users
-    WHERE username = '#{DEFAULT_USER[:username]}';"
-
-  connection.exec "INSERT INTO spaces (owner, spacename)
-    VALUES (
-      #{default_user_record[0]['id']},
+  connection.exec "INSERT INTO users (id, username)
+    VALUES (#{DEFAULT_USER[:id]}, '#{DEFAULT_USER[:username]}');"
+  connection.exec "INSERT INTO spaces (id, owner, spacename)
+    VALUES (#{DEFAULT_SPACE[:id]},
+      #{DEFAULT_USER[:id]},
       '#{DEFAULT_SPACE[:spacename]}'
     );"
 end
