@@ -44,6 +44,7 @@ class Space
   end
 
   def self.add_availability(spaceid:, date:)
+    puts 'in the model'
     date = date.split '/'
     date = date.reverse.join '-'
     DatabaseConnection.query "INSERT
