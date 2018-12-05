@@ -1,14 +1,15 @@
 DEFAULT_USER = {
-  id: 1,
+  id: 0,
   username: 'Adam',
   email: 'antman@pop.com',
   password: 'bacon'
 }
-DEFAULT_SPACE = { id: 1, spacename: 'Pickle Place' }
+DEFAULT_SPACE = { id: 0, spacename: 'Pickle Place' }
 DEFAULT_AVAILABILITY = {
-  id: 1,
+  id: 0,
   spaceid: DEFAULT_SPACE[:id],
-  date: '2019-02-27'
+  date: '2019-02-27',
+  formatted_date: '27/02/2019'
 }
 
 def set_up_database

@@ -5,8 +5,8 @@ describe 'Space' do
 
       expect(list_of_spaces.length).to eq 1
       expect(list_of_spaces[0]).to be_a Space
-      expect(list_of_spaces[0].id).to eq("1")
-      expect(list_of_spaces[0].spacename).to eq("Pickle Place")
+      expect(list_of_spaces[0].id).to eq DEFAULT_SPACE[:id].to_s
+      expect(list_of_spaces[0].spacename).to eq DEFAULT_SPACE[:spacename]
     end
   end
 
@@ -39,7 +39,7 @@ describe 'Space' do
   context '#view_availability' do
     it 'returns the list of available dates for a space' do
       expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
-        .to include DEFAULT_AVAILABILITY[:date]
+        .to include DEFAULT_AVAILABILITY[:formatted_date]
     end
   end
 
