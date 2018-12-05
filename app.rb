@@ -42,6 +42,7 @@ class Makersbnb < Sinatra::Base
   get '/space_profile/:id' do
     @comments = Comment.show_comments_by_space(spaceid: params['id'])
     @space = Space.view_space_details(spaceid: params['id'])
+    @dates = Space.view_availability(spaceid: params['id'])
     erb :space_profile
   end
 

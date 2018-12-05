@@ -22,6 +22,19 @@
       </p>
     </div>
 <% end %>
+  <br>
+    <div class="available-dates">
+      <p>
+        Available Dates
+        <ul>
+            <% @dates.each do |date| %>
+            <li>
+              <%= date %>
+            </li>
+            <% end %>
+          </ul>
+      </p>
+    </div>
     <div class="comments-list">
       Previous comments
       <ul>
