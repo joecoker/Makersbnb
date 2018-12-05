@@ -70,4 +70,18 @@ class Makersbnb < Sinatra::Base
     redirect '/spaces'
   end
 
+  post '/create_booking/:id' do
+    Booking.create_booking(userid: session['user'].userid,
+      spaceid: params['id'] ,
+      start_date: params['start_date'],
+      end_date: params['end_date']
+    )
+    redirect "/your_bookings/#{session['user'].userid}"
+  end
+
+  get "/your_bookings/:userid" do
+    @user_bookings = Booking.list_bookings_by_user(userid: session['user'].userid)
+    erb :your_bookings
+  end
+
 end

@@ -28,3 +28,4 @@
 * check_availability
 * notify_owner
 * update_availability
+* list_bookings_by_user

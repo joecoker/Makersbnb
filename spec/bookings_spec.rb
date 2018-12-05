@@ -13,4 +13,21 @@ describe Booking do
       expect(booking).to be_a Booking
     end
   end
+
+  describe 'list_bookings_by_user' do
+    it "lists all the bookings made by a user" do
+      booking = Booking.create_booking(userid: 1,
+        spaceid: 1,
+        start_date: "2018-12-20",
+        end_date: "2018-12-23"
+      )
+
+      users_bookings = Booking.list_bookings_by_user(userid: 1)
+
+      expect(users_bookings.first.spaceid).to eq(booking.spaceid)
+      expect(users_bookings.first.start_date).to eq(booking.start_date)
+      expect(users_bookings.first.end_date).to eq(booking.end_date)
+
+    end
+  end
 end

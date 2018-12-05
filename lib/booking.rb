@@ -24,4 +24,20 @@ class Booking
         confirmed: false
       )
   end
+
+  def self.list_bookings_by_user(userid:)
+    result = DatabaseConnection.query("
+      SELECT * FROM bookings
+      WHERE hirerid = #{userid};")
+
+    result.map do |booking|
+      Booking.new(
+        start_date: booking['startdate'],
+        end_date: booking['enddate'],
+        userid: booking['hirerid'],
+        spaceid: booking['spaceid'],
+        confirmed: booking['confirmed']
+      )
+    end
+  end
 end
