@@ -81,6 +81,11 @@ class Makersbnb < Sinatra::Base
 
   get "/your_bookings/:userid" do
     @user_bookings = Booking.list_bookings_by_user(userid: session['user'].userid)
+    @bookings_and_spaces = @user_bookings.map do |booking|
+      space = Space.view_space_details(spaceid: booking.spaceid)
+      booking.confirmed == true ? ready = "confirmed" : ready = "pending"
+      {spacename: space[:spacename], confirmed: ready}
+    end
     erb :your_bookings
   end
 

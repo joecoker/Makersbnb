@@ -2,14 +2,13 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Your booking requests</title>
   </head>
   <body>
-    <% @user_booking.each do |booking| %>
+    <h1>Your booking requests</h1>
+    <% @bookings_and_spaces.each do |booking| %>
       <li>
-        <a href='/space_profile/<%= space.id %>'>
-          <%= sp.spacename %>
-        </a>
+        Booking request for <%= booking[:spacename] %> <%= booking[:confirmed] %>
       </li>
     <% end %>
   </body>
