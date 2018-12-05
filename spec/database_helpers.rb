@@ -13,7 +13,7 @@ end
 
 def clear_database
   connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "TRUNCATE TABLE spaces, users, comments"
+  connection.exec "TRUNCATE TABLE spaces, users, comments, availability"
 end
 
 def populate_database

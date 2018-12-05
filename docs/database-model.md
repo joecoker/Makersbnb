@@ -25,7 +25,7 @@
 #### Table name: availability
 - id (PK)
 - space (FK -> spaces::id)
-- date
+- availabledate
 - unavailable
 
 #### Table name: comments
