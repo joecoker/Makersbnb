@@ -26,4 +26,10 @@ class Space
       spacename: result[0]['spacename']
     )
   end
+
+  def self.view_space_details(spaceid:)
+    result = DatabaseConnection.query "SELECT * FROM spaces
+      WHERE id='#{spaceid}';"
+    { id: result[0]['id'], spacename: result[0]['spacename'] }
+  end
 end

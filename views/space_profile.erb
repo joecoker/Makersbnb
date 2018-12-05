@@ -5,25 +5,23 @@
     <title>Space profile</title>
   </head>
   <body>
-    <div class="">
+    <div class="spacename">
       <h1>
-         <%# <%= @space.name %>
-        Hello Space
+        <%= @space[:spacename] %>
       </h1>
     </div>
+<% if false %>
     <div class="">
       <p>
-        Lorem Ipsum
-        <%# <%= @space.description %>
+        <%= @space[:description] %>
       </p>
     </div>
     <div class="">
       <p>
-        £200
-        <%# <%= @space.price %>
+        <%= @space[:price] %>
       </p>
     </div>
-
+<% end %>
     <div class="comments-list">
       Previous comments
       <ul>
@@ -36,10 +34,10 @@
         </ul>
     </div>
 
-    <form class="" action="/create_comment" method="post">
+    <form class="" action="/create_comment/<%= params['id'] %>" method="post">
       <label for="">
         Make comment:
-        <input type="text" name="content" value="">
+        <input type="text" name="comment_text" placeholder="Comment here">
         <input type="submit" name="" value="Submit">
       </label>
     </form>

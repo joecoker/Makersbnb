@@ -34,13 +34,18 @@ class Makersbnb < Sinatra::Base
   end
 
   get '/space_profile/:id' do
-    @comments = Comment.show_comments_by_space(params[:id])
+    @comments = Comment.show_comments_by_space(spaceid: params['id'])
+    @space = Space.view_space_details(spaceid: params['id'])
     erb :space_profile
   end
 
-  post '/create_comment' do
-
-    redirect '/space_profile/:id'
+  post '/create_comment/:id' do
+    Comment.create(
+      userid: session['user'].userid,
+      spaceid: params['id'],
+      comment_text: params['comment_text']
+    )
+    redirect "/space_profile/#{params['id']}"
   end
 
   get '/create-a-space' do

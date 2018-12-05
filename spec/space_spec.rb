@@ -1,5 +1,4 @@
 describe 'Space' do
-
   context '#list_spaces' do
     it 'returns a list of the spaces object with id numbers' do
       list_of_spaces = Space.list_spaces
@@ -23,6 +22,17 @@ describe 'Space' do
         space.spacename == 'My House'
       }
       expect(my_house).not_to be nil
+    end
+  end
+
+  context '#view_space_details' do
+    it 'returns the details for a given space id' do
+      my_house = Space.create_space(
+        spacename: 'My House',
+        ownerid: DEFAULT_USER[:id]
+      )
+      house_details = Space.view_space_details(spaceid: my_house.id)
+      expect(house_details[:spacename]).to eq 'My House'
     end
   end
 end
