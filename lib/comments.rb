@@ -8,29 +8,29 @@ class Comment
     @comment_text = comment_text
   end
 
-  def self.create(userid, spaceid, comment_text)
+  def self.create(userid:, spaceid:, comment_text:)
     result = DatabaseConnection.query(
-      "INSERT INTO comments (commenter, space, comment_text)
+      "INSERT INTO comments (commenter, space, commenttext)
       VALUES (#{userid}, #{spaceid}, '#{comment_text}')
-      RETURNING id, commenter, space, comment_text;"
+      RETURNING id, commenter, space, commenttext;"
     )
     Comment.new(
       id: result[0]['id'],
-      userid: result[0]['userid'],
-      spaceid: result[0]['spaceid'],
-      comment_text: result[0]['comment_text']
+      userid: result[0]['commenter'],
+      spaceid: result[0]['space'],
+      comment_text: result[0]['commenttext']
     )
   end
 
-  def self.show_comments_by_space(spaceid)
+  def self.show_comments_by_space(spaceid:)
     result = DatabaseConnection.query(
-      "SELECT comments.comment_text, users.username FROM comments
+      "SELECT comments.commenttext, users.username FROM comments
       INNER JOIN users
       ON comments.commenter = users.id
       WHERE comments.space = #{spaceid};"
     )
     result.map do |comment|
-      { comment_text: comment['comment_text'], username: comment['username'] }
+      { comment_text: comment['commenttext'], username: comment['username'] }
     end
   end
 
