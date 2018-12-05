@@ -49,7 +49,8 @@ class Makersbnb < Sinatra::Base
   end
 
   post '/add-space' do
-    id = User.get_user_id(username: params[:username])
+    user = session['user']
+    id = User.get_user_id(username: user.username)
     Space.create_space(
       ownerid: id,
       spacename: params[:space_name]
