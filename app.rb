@@ -1,4 +1,5 @@
 require 'sinatra/base'
+require 'sinatra/flash'
 require './lib/user'
 require './lib/space'
 require './lib/comments'
@@ -6,6 +7,7 @@ require_relative './database_connection_setup'
 
 class Makersbnb < Sinatra::Base
   enable :sessions
+  register Sinatra::Flash
 
   get '/' do
     erb :homepage
@@ -21,11 +23,15 @@ class Makersbnb < Sinatra::Base
   end
 
   post '/user_login' do
-    session['user'] = User.login(
-      username: params[:login_username],
-      password: params[:login_password]
-    )
-    redirect '/spaces'
+    begin
+      session['user'] = User.login(
+        username: params[:login_username],
+        password: params[:login_password]
+      )
+      redirect '/spaces'
+    rescue IndexError
+      flash.now[:error] = "Incorrect username or password"
+    end
   end
 
   get '/spaces' do
