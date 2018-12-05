@@ -38,14 +38,16 @@ describe 'Space' do
 
   context '#view_availability' do
     it 'returns the list of available dates for a space' do
-      expect(space.view_availability).to include DEFAULT_AVAILABILITY[:date]
+      expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
+        .to include DEFAULT_AVAILABILITY[:date]
     end
   end
 
   context '#add_availability' do
     it 'adds an available date to the database ' do
       Space.add_availability(spaceid: DEFAULT_SPACE[:id], date: '17/12/2018')
-      expect(space.view_availability).to include '17/12/2018'
+      expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
+        .to include '17/12/2018'
     end
   end
 end
