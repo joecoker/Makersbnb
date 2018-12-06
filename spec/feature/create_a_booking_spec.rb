@@ -5,6 +5,6 @@ feature 'User submits a booking request' do
     fill_in('start_date', with: '2018-12-20')
     fill_in('end_date', with: '2018-12-23')
     click_button('Request booking')
-    expect(page).to have_content('Booking request for Pickle Place pending')
+    expect(page).to have_content('Booking request for #{DEFAULT_SPACE[:spacename]} pending')
   end
 end
