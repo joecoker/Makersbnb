@@ -93,4 +93,11 @@ describe 'Space' do
       expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id])).not_to include DEFAULT_AVAILABILITY[:formatted_date]
     end
   end
+
+  describe'list_spaces_by_owner' do
+    it "return a list of all spaces an owner has" do
+      spaces = Space.list_spaces_by_owner(ownerid: DEFAULT_USER[:id])
+      expect(spaces[0].spacename).to eq DEFAULT_SPACE[:spacename]
+    end
+  end
 end

@@ -11,6 +11,7 @@
 * create_space
 * approve_booking
 * list_booking_requests_by_owner
+* list_spaces_by_owner
 * update_space_details
 * update_availability
 

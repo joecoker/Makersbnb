@@ -8,7 +8,7 @@ feature 'login to MakersBnB' do
   scenario 'users are logged in after creating an account' do
     test_login
     visit '/create-a-space'
-    expect(page).to have_content 'You are logged in as: Wolverine'
+    expect(page).to have_content "You are logged in as: #{DEFAULT_USER[:username]}"
   end
 
   scenario 'users can log in using existing account details' do

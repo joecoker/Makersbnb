@@ -60,4 +60,15 @@ class Space
     SET unavailable = TRUE
     WHERE space = #{spaceid} AND availabledate = '#{date}';"
   end
+
+  def self.list_spaces_by_owner(ownerid:)
+    result = DatabaseConnection.query("
+      SELECT * FROM spaces WHERE owner = #{ownerid};")
+    result.map do |space|
+      Space.new(
+        id: space['id'],
+        spacename: space['spacename']
+      )
+    end
+  end
 end

@@ -1,7 +1,6 @@
 def test_login
   visit '/'
-  fill_in('username', with: 'Wolverine')
-  fill_in('email', with: 'Xmen@gmail.com')
-  fill_in('password', with: 'password')
-  click_button('Submit')
+  fill_in('login_username', with: DEFAULT_USER[:username])
+  fill_in('login_password', with: DEFAULT_USER[:password])
+  click_button('Log in')
 end
