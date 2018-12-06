@@ -23,12 +23,12 @@
     display: inline;
     }
 
-    div {
-    background-color: white;
-    width: 300px;
-    border: 25px solid grey;
-    padding: 25px;
-    margin: 25px;
+    .space-list-item{
+      background-color: white;
+      width: 300px;
+      border: 15px solid grey;
+      padding: 15px;
+      margin: 15px;
     }
 
     nav  {
@@ -50,32 +50,29 @@
     <meta charset="utf-8">
     <title>View Spaces</title>
 </head>
-  <nav>
+<nav>
 
-    <ul>
-      <li><a href='/create-a-space'>Create a space</a></li>
-      <li><a href='/update-a-space'>Update my space</a></li>
-      <li><a href='/view-booking-requests'>Requests</a></li>
-      <li><a href="signout">Sign out</a></li>
-    </ul>
+  <ul>
+    <li><a href='/spaces'>Home</a><li> &nbsp &nbsp
+    <li><a href='/create-a-space'>Create a space</a></li> &nbsp &nbsp
+    <li><a href="/view-booking-requests">Requests</a></li> &nbsp &nbsp
+    <li><a href="/">Sign out</a></li>
+  </ul>
 
-  </nav>
-    <h1>Spaces</h1>
+</nav>
+
 <body>
-
-  <a href='/view-booking-requests'>View your spaces booking requests</a>
-<h1>Spaces</h1>
+  <h1>Spaces</h1>
 
 <% @all_spaces.each do |space| %>
-<div>
-  <li>
-    <a href='/space_profile/<%= space.id %>'>
-      <%= space.spacename %>
-    </a>
-  </li>
+  <div class="space-list-item">
+    <li>
+      <a href='/space_profile/<%= space.id %>'>
+        <%= space.spacename %>
+      </a>
+    </li>
   </div>
 <% end %>
 
-    </head>
   </body>
 </html>
