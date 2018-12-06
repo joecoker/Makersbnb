@@ -9,20 +9,20 @@ class Booking
     @confirmed = confirmed
   end
 
-  def self.create_booking(userid:, spaceid:, start_date:, end_date: )
+  def self.create_booking(userid:, spaceid:, start_date:, end_date:)
     result = DatabaseConnection.query("INSERT
       INTO bookings (spaceid, hirerid, startdate, enddate)
       VALUES (#{spaceid}, #{userid}, '#{start_date}', '#{end_date}')
       RETURNING spaceid, hirerid, startdate, enddate, confirmed;
       ")
 
-      Booking.new(
-        start_date: result[0]['startdate'],
-        end_date: result[0]['enddate'],
-        userid: result[0]['hirerid'],
-        spaceid: result[0]['spaceid'],
-        confirmed: result[0]['confirmed']
-      )
+    Booking.new(
+      start_date: result[0]['startdate'],
+      end_date: result[0]['enddate'],
+      userid: result[0]['hirerid'],
+      spaceid: result[0]['spaceid'],
+      confirmed: result[0]['confirmed']
+    )
   end
 
   def self.list_bookings_by_user(userid:)
