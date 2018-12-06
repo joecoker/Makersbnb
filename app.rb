@@ -108,6 +108,11 @@ class Makersbnb < Sinatra::Base
       start_date: params['start_date'],
       end_date: params['end_date']
     )
+    Space.make_range_unavailable(
+      spaceid: params['id'] ,
+      start_date: params['start_date'],
+      end_date: params['end_date']
+    )
     redirect "/your_bookings/#{session['user'].userid}"
   end
 

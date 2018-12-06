@@ -61,6 +61,12 @@ class Space
     WHERE space = #{spaceid} AND availabledate = '#{date}';"
   end
 
+  def self.make_range_unavailable(spaceid:, start_date:, end_date:)
+    (start_date..end_date).each do |date|
+      Space.make_unavailable(spaceid: spaceid, date: date)
+    end
+  end
+
   def self.list_spaces_by_owner(ownerid:)
     result = DatabaseConnection.query("
       SELECT * FROM spaces WHERE owner = #{ownerid};")
