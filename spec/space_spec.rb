@@ -86,4 +86,20 @@ describe 'Space' do
       end
     end
   end
+
+  describe '.check_availability' do
+    it 'checks a day to get back true when the date is available' do
+      expect(Space.check_availability(
+        spaceid: DEFAULT_SPACE[:id],
+        date: DEFAULT_AVAILABILITY[:date])
+      ).to be(true)
+    end
+
+    it 'checks an unavailable day and returns false' do
+      expect(Space.check_availability(
+        spaceid: DEFAULT_SPACE[:id],
+        date: '2017-02-02')
+      ).to be(false)
+    end
+  end
 end
