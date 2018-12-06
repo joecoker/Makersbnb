@@ -14,6 +14,16 @@ SECOND_DEFAULT_USER = {
 
 DEFAULT_SPACE = { id: 0, spacename: 'Pickle Place' }
 
+DEFAULT_BOOKING ={
+  id: 0,
+  spaceid: DEFAULT_SPACE[:id],
+  hirerid: SECOND_DEFAULT_USER[:id],
+  start_date: "2018-12-20",
+  end_date: "2018-12-23"
+  )
+
+}
+
 def set_up_database
   clear_database
   populate_database
@@ -44,6 +54,17 @@ end
 def add_second_default_user
   connection = PG.connect :dbname => 'makersbnb_test'
   connection.exec "INSERT INTO users (id, username, email, password)
+    VALUES (
+      #{SECOND_DEFAULT_USER[:id]},
+      '#{SECOND_DEFAULT_USER[:username]}',
+      '#{SECOND_DEFAULT_USER[:email]}',
+      '#{SECOND_DEFAULT_USER[:password]}'
+    );"
+end
+
+def add_default_booking
+  connection = PG.connect :dbname => 'makersbnb_test'
+  connection.exec "INSERT INTO bookings (id, spaceid, hirerid, startdate, enddate)
     VALUES (
       #{SECOND_DEFAULT_USER[:id]},
       '#{SECOND_DEFAULT_USER[:username]}',
