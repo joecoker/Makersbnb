@@ -21,7 +21,7 @@ class Booking
         end_date: result[0]['enddate'],
         userid: result[0]['hirerid'],
         spaceid: result[0]['spaceid'],
-        confirmed: false
+        confirmed: result[0]['confirmed']
       )
   end
 
