@@ -1,8 +1,8 @@
 describe Booking do
   describe 'create_booking' do
     it 'creates a booking entry in the database and returns an object' do
-      booking = Booking.create_booking(userid: 1,
-        spaceid: 1,
+      booking = Booking.create_booking(userid: SECOND_DEFAULT_USER[:id],
+        spaceid: DEFAULT_SPACE[:id],
         start_date: "2018-12-20",
         end_date: "2018-12-23"
       )
@@ -16,8 +16,8 @@ describe Booking do
 
   describe 'list_bookings_by_user' do
     it "lists all the bookings made by a user" do
-      booking = Booking.create_booking(userid: 1,
-        spaceid: 1,
+      booking = Booking.create_booking(userid: SECOND_DEFAULT_USER[:id],
+        spaceid: DEFAULT_SPACE[:id],
         start_date: "2018-12-20",
         end_date: "2018-12-23"
       )

@@ -4,6 +4,8 @@ require './lib/user'
 require './lib/space'
 require './lib/comments'
 require './lib/booking'
+require './lib/owner'
+
 require_relative './database_connection_setup'
 
 class Makersbnb < Sinatra::Base

@@ -10,7 +10,7 @@
 ****Owner****
 * create_space
 * approve_booking
-* view_booking_requests
+* list_booking_requests_by_owner
 * update_space_details
 * update_availability
 

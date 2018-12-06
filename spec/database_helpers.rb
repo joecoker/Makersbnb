@@ -1,10 +1,18 @@
 DEFAULT_USER = {
-  id: 1,
+  id: 0,
   username: 'Adam',
   email: 'antman@pop.com',
   password: 'bacon'
 }
-DEFAULT_SPACE = { id: 1, spacename: 'Pickle Place' }
+
+SECOND_DEFAULT_USER = {
+  id: 1,
+  username: 'Ben',
+  email: 'ben@test.com',
+  password: 'password'
+}
+
+DEFAULT_SPACE = { id: 0, spacename: 'Pickle Place' }
 
 def set_up_database
   clear_database
@@ -18,6 +26,7 @@ end
 
 def populate_database
   add_default_user
+  add_second_default_user
   add_default_space
 end
 
@@ -29,6 +38,17 @@ def add_default_user
       '#{DEFAULT_USER[:username]}',
       '#{DEFAULT_USER[:email]}',
       '#{DEFAULT_USER[:password]}'
+    );"
+end
+
+def add_second_default_user
+  connection = PG.connect :dbname => 'makersbnb_test'
+  connection.exec "INSERT INTO users (id, username, email, password)
+    VALUES (
+      #{SECOND_DEFAULT_USER[:id]},
+      '#{SECOND_DEFAULT_USER[:username]}',
+      '#{SECOND_DEFAULT_USER[:email]}',
+      '#{SECOND_DEFAULT_USER[:password]}'
     );"
 end
 

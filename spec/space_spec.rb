@@ -5,7 +5,7 @@ describe 'Space' do
 
       expect(list_of_spaces.length).to eq 1
       expect(list_of_spaces[0]).to be_a Space
-      expect(list_of_spaces[0].id).to eq("1")
+      expect(list_of_spaces[0].id).to eq("0")
       expect(list_of_spaces[0].spacename).to eq("Pickle Place")
     end
   end
