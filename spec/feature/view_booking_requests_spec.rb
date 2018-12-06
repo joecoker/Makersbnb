@@ -5,8 +5,11 @@ feature 'booking requests page' do
     fill_in('login_password', with: DEFAULT_USER[:password])
     click_button('Log in')
 
-    click_link('View your spaces booking requests')
+    click_link('Requests')
 
-    expect(page).to have_content("#{DEFAULT_SPACE[:spacename]} has been requested from #{DEFAULT_BOOKING[:start_date]} to #{DEFAULT_BOOKING[:end_date]}")
+    expect(page).to have_content("#{DEFAULT_SPACE[:spacename]}")
+    expect(page).to have_content("#{DEFAULT_BOOKING[:start_date]}")
+    expect(page).to have_content("#{DEFAULT_BOOKING[:end_date]}")
+
   end
 end
