@@ -1,15 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
+  <style>
+    body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("/peace.jpeg");
+    font-family: "Verdana", sans-serif;
+      }
+
+    h1 {
+    color: white;
+    font-size: 75px;
+    text-align: center;
+    }
+
+    li {
+    display: inline;
+    }
+
+    .space-list-item{
+      background-color: white;
+      /* width: 300px; */
+      border: 15px solid grey;
+      padding: 15px;
+      margin: 15px;
+    }
+
+
+  </style>
+
     <meta charset="utf-8">
     <title>Your booking requests</title>
   </head>
   <body>
     <h1>Your booking requests</h1>
-    <% @bookings_and_spaces.each do |booking| %>
-      <li>
-        Booking request for <%= booking[:spacename] %> <%= booking[:confirmed] %>
-      </li>
-    <% end %>
+    <div class="space-list-item">
+      <% @bookings_and_spaces.each do |booking| %>
+        <li>
+          Booking request for <%= booking[:spacename] %> <%= booking[:confirmed] %>
+        </li>
+      <% end %>
+    </div>
+
   </body>
 </html>
