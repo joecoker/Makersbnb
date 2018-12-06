@@ -1,3 +1,5 @@
+CONNECTION = PG.connect :dbname => 'makersbnb_test'
+
 DEFAULT_USER = {
   id: 0,
   username: 'Adam',
@@ -33,8 +35,7 @@ def set_up_database
 end
 
 def clear_database
-  connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "TRUNCATE TABLE spaces, users, comments, availability, bookings"
+  CONNECTION.exec "TRUNCATE TABLE spaces, users, comments, availability, bookings"
 end
 
 def populate_database
@@ -46,8 +47,7 @@ def populate_database
 end
 
 def add_default_user
-  connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "INSERT INTO users (id, username, email, password)
+  CONNECTION.exec "INSERT INTO users (id, username, email, password)
     VALUES (
       #{DEFAULT_USER[:id]},
       '#{DEFAULT_USER[:username]}',
@@ -57,8 +57,7 @@ def add_default_user
 end
 
 def add_second_default_user
-  connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "INSERT INTO users (id, username, email, password)
+  CONNECTION.exec "INSERT INTO users (id, username, email, password)
     VALUES (
       #{SECOND_DEFAULT_USER[:id]},
       '#{SECOND_DEFAULT_USER[:username]}',
@@ -68,8 +67,7 @@ def add_second_default_user
 end
 
 def add_default_booking
-  connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "INSERT INTO bookings (id, spaceid, hirerid, startdate, enddate)
+  CONNECTION.exec "INSERT INTO bookings (id, spaceid, hirerid, startdate, enddate)
     VALUES (
       #{DEFAULT_BOOKING[:id]},
       '#{DEFAULT_BOOKING[:spaceid]}',
@@ -80,8 +78,7 @@ def add_default_booking
 end
 
 def add_default_space
-  connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "INSERT INTO spaces (id, owner, spacename)
+  CONNECTION.exec "INSERT INTO spaces (id, owner, spacename)
     VALUES (
       #{DEFAULT_SPACE[:id]},
       #{DEFAULT_USER[:id]},
@@ -90,8 +87,7 @@ def add_default_space
 end
 
 def add_default_availability
-  connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "INSERT INTO availability (id, space, availabledate)
+  CONNECTION.exec "INSERT INTO availability (id, space, availabledate)
     VALUES (
       #{DEFAULT_AVAILABILITY[:id]},
       #{DEFAULT_AVAILABILITY[:spaceid]},
