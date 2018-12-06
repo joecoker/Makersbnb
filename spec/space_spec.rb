@@ -5,8 +5,8 @@ describe 'Space' do
 
       expect(list_of_spaces.length).to eq 1
       expect(list_of_spaces[0]).to be_a Space
-      expect(list_of_spaces[0].id).to eq("1")
-      expect(list_of_spaces[0].spacename).to eq("Pickle Place")
+      expect(list_of_spaces[0].id).to eq DEFAULT_SPACE[:id].to_s
+      expect(list_of_spaces[0].spacename).to eq DEFAULT_SPACE[:spacename]
     end
   end
 
@@ -33,6 +33,21 @@ describe 'Space' do
       )
       house_details = Space.view_space_details(spaceid: my_house.id)
       expect(house_details[:spacename]).to eq 'My House'
+    end
+  end
+
+  context '#view_availability' do
+    it 'returns the list of available dates for a space' do
+      expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
+        .to include DEFAULT_AVAILABILITY[:formatted_date]
+    end
+  end
+
+  context '#add_availability' do
+    it 'adds an available date to the database ' do
+      Space.add_availability(spaceid: DEFAULT_SPACE[:id], date: '17/12/2018')
+      expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
+        .to include '17/12/2018'
     end
   end
 end

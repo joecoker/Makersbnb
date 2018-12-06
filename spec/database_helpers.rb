@@ -1,10 +1,16 @@
 DEFAULT_USER = {
-  id: 1,
+  id: 0,
   username: 'Adam',
   email: 'antman@pop.com',
   password: 'bacon'
 }
-DEFAULT_SPACE = { id: 1, spacename: 'Pickle Place' }
+DEFAULT_SPACE = { id: 0, spacename: 'Pickle Place' }
+DEFAULT_AVAILABILITY = {
+  id: 0,
+  spaceid: DEFAULT_SPACE[:id],
+  date: '2019-02-27',
+  formatted_date: '27/02/2019'
+}
 
 def set_up_database
   clear_database
@@ -13,12 +19,13 @@ end
 
 def clear_database
   connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "TRUNCATE TABLE spaces, users, comments"
+  connection.exec "TRUNCATE TABLE spaces, users, comments, availability"
 end
 
 def populate_database
   add_default_user
   add_default_space
+  add_default_availability
 end
 
 def add_default_user
@@ -39,5 +46,15 @@ def add_default_space
       #{DEFAULT_SPACE[:id]},
       #{DEFAULT_USER[:id]},
       '#{DEFAULT_SPACE[:spacename]}'
+    );"
+end
+
+def add_default_availability
+  connection = PG.connect :dbname => 'makersbnb_test'
+  connection.exec "INSERT INTO availability (id, space, availabledate)
+    VALUES (
+      #{DEFAULT_AVAILABILITY[:id]},
+      #{DEFAULT_AVAILABILITY[:spaceid]},
+      '#{DEFAULT_AVAILABILITY[:date]}'
     );"
 end

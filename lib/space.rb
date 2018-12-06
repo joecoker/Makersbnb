@@ -32,4 +32,23 @@ class Space
       WHERE id='#{spaceid}';"
     { id: result[0]['id'], spacename: result[0]['spacename'] }
   end
+
+  def self.view_availability(spaceid:)
+    result = DatabaseConnection.query "SELECT
+      to_char(availabledate, 'dd/mm/yyyy')
+      FROM availability
+      WHERE space=#{spaceid};"
+    result.map do |availability|
+      availability['to_char']
+    end
+  end
+
+  def self.add_availability(spaceid:, date:)
+    puts 'in the model'
+    date = date.split '/'
+    date = date.reverse.join '-'
+    DatabaseConnection.query "INSERT
+      INTO availability (space, availabledate)
+      VALUES ('#{spaceid}', '#{date}');"
+  end
 end
