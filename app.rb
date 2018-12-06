@@ -84,7 +84,7 @@ class Makersbnb < Sinatra::Base
 
   post '/create_booking/:id' do
     Booking.create_booking(userid: session['user'].userid,
-      spaceid: params['id'] ,
+      spaceid: params['id'],
       start_date: params['start_date'],
       end_date: params['end_date']
     )
@@ -92,17 +92,19 @@ class Makersbnb < Sinatra::Base
   end
 
   get "/your_bookings/:userid" do
-    @user_bookings = Booking.list_bookings_by_user(userid: session['user'].userid)
+    @user_bookings = Booking.list_bookings_by_user(
+      userid: session['user'].userid)
     @bookings_and_spaces = @user_bookings.map do |booking|
       space = Space.view_space_details(spaceid: booking.spaceid)
       booking.confirmed == true ? ready = "confirmed" : ready = "pending"
-      {spacename: space[:spacename], confirmed: ready}
+      { spacename: space[:spacename], confirmed: ready }
     end
     erb :your_bookings
   end
 
   get "/view-booking-requests" do
-    @requests = Owner.list_booking_requests_by_owner(ownerid: session['user'].userid)
+    @requests = Owner.list_booking_requests_by_owner(
+      ownerid: session['user'].userid)
     erb :view_booking_requests
   end
 
