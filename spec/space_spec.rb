@@ -86,4 +86,11 @@ describe 'Space' do
       end
     end
   end
+
+  describe 'make_unavailable' do
+    it "flag the date as unavailable" do
+      Space.make_unavailable(date: DEFAULT_AVAILABILITY[:date], spaceid: DEFAULT_SPACE[:id])
+      expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id])).not_to include DEFAULT_AVAILABILITY[:formatted_date]
+    end
+  end
 end

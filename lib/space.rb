@@ -37,7 +37,7 @@ class Space
     result = DatabaseConnection.query "SELECT
       to_char(availabledate, 'dd/mm/yyyy')
       FROM availability
-      WHERE space=#{spaceid};"
+      WHERE space=#{spaceid} AND unavailable = FALSE;"
     result.map do |availability|
       availability['to_char']
     end
@@ -53,5 +53,11 @@ class Space
     (start_date..end_date).each do |date|
       Space.add_availability(spaceid: spaceid, date: date)
     end
+  end
+
+  def self.make_unavailable(date:, spaceid:)
+    result = DatabaseConnection.query "UPDATE availability
+    SET unavailable = TRUE
+    WHERE space = #{spaceid} AND availabledate = '#{date}';"
   end
 end
