@@ -3,6 +3,9 @@ require 'sinatra/flash'
 require './lib/user'
 require './lib/space'
 require './lib/comments'
+require './lib/booking'
+require './lib/owner'
+
 require_relative './database_connection_setup'
 
 class Makersbnb < Sinatra::Base
@@ -77,6 +80,30 @@ class Makersbnb < Sinatra::Base
       )
     end
     redirect '/spaces'
+  end
+
+  post '/create_booking/:id' do
+    Booking.create_booking(userid: session['user'].userid,
+      spaceid: params['id'] ,
+      start_date: params['start_date'],
+      end_date: params['end_date']
+    )
+    redirect "/your_bookings/#{session['user'].userid}"
+  end
+
+  get "/your_bookings/:userid" do
+    @user_bookings = Booking.list_bookings_by_user(userid: session['user'].userid)
+    @bookings_and_spaces = @user_bookings.map do |booking|
+      space = Space.view_space_details(spaceid: booking.spaceid)
+      booking.confirmed == true ? ready = "confirmed" : ready = "pending"
+      {spacename: space[:spacename], confirmed: ready}
+    end
+    erb :your_bookings
+  end
+
+  get "/view-booking-requests" do
+    @requests = Owner.list_booking_requests_by_owner(ownerid: session['user'].userid)
+    erb :view_booking_requests
   end
 
 end

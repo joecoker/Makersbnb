@@ -58,6 +58,16 @@
       </p>
     </div>
 <% end %>
+    <div class="booking-form">
+      <form action="/create_booking/<%= params['id'] %>" method="post">
+        <label for="start_date">Start date:</label>
+        <input type="date" name="start_date" />
+        <label for="end_date">End date:</label>
+        <input type="date" name="end_date" />
+        <input type="submit" name="" value="Request booking">
+      </form>
+    </div>
+
   <br>
     <div class="available-dates">
       <p>
@@ -71,6 +81,7 @@
           </ul>
       </p>
     </div>
+
     <div class="comments-list">
       Previous comments
       <ul>

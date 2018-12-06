@@ -2,7 +2,7 @@ describe 'User can request a booking after viewing a space' do
   describe '.create' do
     it 'allows a user to enter comments' do
       comment = Comment.create(
-        userid: DEFAULT_USER[:id],
+        userid: SECOND_DEFAULT_USER[:id],
         spaceid: DEFAULT_SPACE[:id],
         comment_text: "Beautiful garden")
       expect(comment.comment_text).to eq("Beautiful garden")
@@ -12,7 +12,7 @@ describe 'User can request a booking after viewing a space' do
   describe '.show_comments' do
     it 'shows a list of comments for a space' do
       comment = Comment.create(
-        userid: DEFAULT_USER[:id],
+        userid: SECOND_DEFAULT_USER[:id],
         spaceid: DEFAULT_SPACE[:id],
         comment_text: "Bad garden"
       )
