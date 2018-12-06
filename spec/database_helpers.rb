@@ -20,8 +20,6 @@ DEFAULT_BOOKING ={
   hirerid: SECOND_DEFAULT_USER[:id],
   start_date: "2018-12-20",
   end_date: "2018-12-23"
-  )
-
 }
 
 def set_up_database
@@ -38,6 +36,7 @@ def populate_database
   add_default_user
   add_second_default_user
   add_default_space
+  add_default_booking
 end
 
 def add_default_user
@@ -66,10 +65,11 @@ def add_default_booking
   connection = PG.connect :dbname => 'makersbnb_test'
   connection.exec "INSERT INTO bookings (id, spaceid, hirerid, startdate, enddate)
     VALUES (
-      #{SECOND_DEFAULT_USER[:id]},
-      '#{SECOND_DEFAULT_USER[:username]}',
-      '#{SECOND_DEFAULT_USER[:email]}',
-      '#{SECOND_DEFAULT_USER[:password]}'
+      #{DEFAULT_BOOKING[:id]},
+      '#{DEFAULT_BOOKING[:spaceid]}',
+      '#{DEFAULT_BOOKING[:hirerid]}',
+      '#{DEFAULT_BOOKING[:start_date]}',
+      '#{DEFAULT_BOOKING[:end_date]}'
     );"
 end
 

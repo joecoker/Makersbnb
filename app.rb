@@ -91,4 +91,9 @@ class Makersbnb < Sinatra::Base
     erb :your_bookings
   end
 
+  get "/view-booking-requests" do
+    @requests = Owner.list_booking_requests_by_owner(ownerid: session['user'].userid)
+    erb :view_booking_requests
+  end
+
 end

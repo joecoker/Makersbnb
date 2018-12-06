@@ -5,6 +5,6 @@ class Owner
       FROM spaces
       INNER JOIN bookings
       ON spaces.id = bookings.spaceid
-      WHERE spaces.owner = '#{ownerid}';")
+      WHERE spaces.owner = #{ownerid};")
   end
 end
