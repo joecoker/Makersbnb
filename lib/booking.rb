@@ -23,8 +23,7 @@ class Booking
   end
 
   def self.list_bookings_by_user(userid:)
-    result = DatabaseConnection.query("
-      SELECT * FROM bookings
+    result = DatabaseConnection.query("SELECT * FROM bookings
       WHERE hirerid = #{userid};")
     result.map do |booking|
       Booking.new(start_date: booking['startdate'],

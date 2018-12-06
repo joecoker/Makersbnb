@@ -25,8 +25,7 @@ class Comment
       "SELECT comments.commenttext, users.username FROM comments
       INNER JOIN users
       ON comments.commenter = users.id
-      WHERE comments.space = #{spaceid};"
-    )
+      WHERE comments.space = #{spaceid};")
     result.map do |comment|
       { comment_text: comment['commenttext'], username: comment['username'] }
     end
