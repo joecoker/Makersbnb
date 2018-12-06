@@ -5,11 +5,23 @@
     <title>MakersBnB</title>
   </head>
   <body>
-    <h1>Give your space a name and confirm your username,
-      then click 'Publish my space'</h1>
+    <h1>Give your space a name, then click 'Publish my space'</h1>
     <form action='/add-space' method='post'>
-      <input type='text' name='space_name' placeholder='My space is called...'>
-      <input type='submit' value='Publish my space'>
+      <p>
+        <input type='text' name='space_name' placeholder='My space is called...'>
+        Your space's name!
+      </p>
+      <p>
+        <input type='date' name='start_availability'>
+        The first date your space is available
+      </p>
+      <p>
+        <input type='date' name='end_availability'>
+        The last date your space is available
+      </p>
+      <p>
+        <input type='submit' value='Publish my space'>
+      </p>
     </form>
     <% if @user %>
       <p>You are logged in as: <%= @user.username %></p>

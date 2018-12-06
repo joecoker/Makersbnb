@@ -17,4 +17,11 @@ feature 'viewing the list of a single spaces' do
     click_link(DEFAULT_SPACE[:spacename])
     expect(page).to have_content 'I want to book this property'
   end
+
+  scenario 'user can see a list of the available dates of a space' do
+    test_login
+    visit '/spaces'
+    click_link(DEFAULT_SPACE[:spacename])
+    expect(page).to have_content DEFAULT_AVAILABILITY[:formatted_date]
+  end
 end

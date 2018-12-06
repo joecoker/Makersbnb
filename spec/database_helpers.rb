@@ -4,16 +4,13 @@ DEFAULT_USER = {
   email: 'antman@pop.com',
   password: 'bacon'
 }
-
 SECOND_DEFAULT_USER = {
   id: 1,
   username: 'Ben',
   email: 'ben@test.com',
   password: 'password'
 }
-
 DEFAULT_SPACE = { id: 0, spacename: 'Pickle Place' }
-
 DEFAULT_BOOKING ={
   id: 0,
   spaceid: DEFAULT_SPACE[:id],
@@ -21,6 +18,14 @@ DEFAULT_BOOKING ={
   start_date: "2018-12-20",
   end_date: "2018-12-23"
 }
+DEFAULT_AVAILABILITY = {
+  id: 0,
+  spaceid: DEFAULT_SPACE[:id],
+  date: '2019-02-27',
+  formatted_date: '27/02/2019'
+}
+DEFAULT_START_AVAILABILITY = Date.new(2019, 04, 12)
+DEFAULT_END_AVAILABILITY = Date.new(2019, 04, 15)
 
 def set_up_database
   clear_database
@@ -29,7 +34,7 @@ end
 
 def clear_database
   connection = PG.connect :dbname => 'makersbnb_test'
-  connection.exec "TRUNCATE TABLE spaces, users, comments, bookings"
+  connection.exec "TRUNCATE TABLE spaces, users, comments, availability, bookings"
 end
 
 def populate_database
@@ -37,6 +42,7 @@ def populate_database
   add_second_default_user
   add_default_space
   add_default_booking
+  add_default_availability
 end
 
 def add_default_user
@@ -80,5 +86,15 @@ def add_default_space
       #{DEFAULT_SPACE[:id]},
       #{DEFAULT_USER[:id]},
       '#{DEFAULT_SPACE[:spacename]}'
+    );"
+end
+
+def add_default_availability
+  connection = PG.connect :dbname => 'makersbnb_test'
+  connection.exec "INSERT INTO availability (id, space, availabledate)
+    VALUES (
+      #{DEFAULT_AVAILABILITY[:id]},
+      #{DEFAULT_AVAILABILITY[:spaceid]},
+      '#{DEFAULT_AVAILABILITY[:date]}'
     );"
 end

@@ -45,6 +45,7 @@ class Makersbnb < Sinatra::Base
   get '/space_profile/:id' do
     @comments = Comment.show_comments_by_space(spaceid: params['id'])
     @space = Space.view_space_details(spaceid: params['id'])
+    @dates = Space.view_availability(spaceid: params['id'])
     erb :space_profile
   end
 
@@ -65,10 +66,19 @@ class Makersbnb < Sinatra::Base
   post '/add-space' do
     user = session['user']
     id = User.get_user_id(username: user.username)
-    Space.create_space(
+    new_space = Space.create_space(
       ownerid: id,
       spacename: params[:space_name]
     )
+    if params[:start_availability] != "" && params[:end_availability] != ""
+      start_date = Date.strptime(params[:start_availability], '%Y-%m-%d')
+      end_date = Date.strptime(params[:end_availability], '%Y-%m-%d')
+      Space.add_availability_range(
+        spaceid: new_space.id,
+        start_date: start_date,
+        end_date: end_date
+      )
+    end
     redirect '/spaces'
   end
 
