@@ -68,9 +68,7 @@ class Makersbnb < Sinatra::Base
       spacename: params[:space_name]
     )
     if params[:start_availability] != "" && params[:end_availability] != ""
-      (Date.strptime(params[:start_availability], '%d/%m/%Y')..Date.strptime(params[:end_availability], '%d/%m/%Y')).each do |date|
-        date = date.to_s.split '-'
-        date = date.reverse.join '/'
+      (params[:start_availability]..params[:end_availability]).each do |date|
         Space.add_availability(spaceid: new_space.id, date: date)
       end
     end

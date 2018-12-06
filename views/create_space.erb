@@ -9,8 +9,8 @@
       then click 'Publish my space'</h1>
     <form action='/add-space' method='post'>
       <input type='text' name='space_name' placeholder='My space is called...'>
-      <input type='text' name='start_availability' placeholder='Available from'>
-      <input type='text' name='end_availability' placeholder='Available to'>
+      <input type='date' name='start_availability' placeholder='Available from'>
+      <input type='date' name='end_availability' placeholder='Available to'>
       <input type='submit' value='Publish my space'>
     </form>
     <% if @user %>

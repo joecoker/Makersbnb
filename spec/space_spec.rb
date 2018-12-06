@@ -45,7 +45,7 @@ describe 'Space' do
 
   context '#add_availability' do
     it 'adds an available date to the database ' do
-      Space.add_availability(spaceid: DEFAULT_SPACE[:id], date: '17/12/2018')
+      Space.add_availability(spaceid: DEFAULT_SPACE[:id], date: '2018-12-17')
       expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
         .to include '17/12/2018'
     end
