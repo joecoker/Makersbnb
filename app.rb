@@ -68,9 +68,13 @@ class Makersbnb < Sinatra::Base
       spacename: params[:space_name]
     )
     if params[:start_availability] != "" && params[:end_availability] != ""
-      (params[:start_availability]..params[:end_availability]).each do |date|
-        Space.add_availability(spaceid: new_space.id, date: date)
-      end
+      start_date = Date.strptime(params[:start_availability], '%Y-%m-%d')
+      end_date = Date.strptime(params[:end_availability], '%Y-%m-%d')
+      Space.add_availability_range(
+        spaceid: new_space.id,
+        start_date: start_date,
+        end_date: end_date
+      )
     end
     redirect '/spaces'
   end

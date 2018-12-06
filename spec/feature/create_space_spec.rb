@@ -12,8 +12,8 @@ feature 'adding a new space' do
     test_login
     visit '/create-a-space'
     fill_in('space_name', with: 'Spaceship')
-    fill_in('start_availability', with: Date.new(2019,01,01))
-    fill_in('end_availability', with: Date.new(2019,01,10))
+    fill_in('start_availability', with: Date.new(2019, 01, 01))
+    fill_in('end_availability', with: Date.new(2019, 01, 10))
     click_button('Publish my space')
     click_link('Spaceship')
     expect(page).to have_content '01/01/2019'

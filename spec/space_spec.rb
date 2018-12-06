@@ -50,4 +50,40 @@ describe 'Space' do
         .to include '17/12/2018'
     end
   end
+
+  context '#add_availability_range' do
+    it 'adds all dates from start to end inclusive' do
+      start_date = DEFAULT_START_AVAILABILITY
+      end_date = DEFAULT_END_AVAILABILITY
+      Space.add_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: start_date,
+        end_date: end_date
+      )
+      (start_date..end_date).each do |date|
+        day = date.day.to_s.rjust(2, "0")
+        month = date.month.to_s.rjust(2, "0")
+        year = date.year
+        expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
+          .to include "#{day}/#{month}/#{year}"
+      end
+    end
+
+    it 'can handle start and end dates in different months/years' do
+      start_date = Date.new(2018, 12, 30)
+      end_date = Date.new(2019, 01, 04)
+      Space.add_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: start_date,
+        end_date: end_date
+      )
+      (start_date..end_date).each do |date|
+        day = date.day.to_s.rjust(2, "0")
+        month = date.month.to_s.rjust(2, "0")
+        year = date.year
+        expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id]))
+          .to include "#{day}/#{month}/#{year}"
+      end
+    end
+  end
 end

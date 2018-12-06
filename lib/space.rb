@@ -48,4 +48,10 @@ class Space
       INTO availability (space, availabledate)
       VALUES ('#{spaceid}', '#{date}');"
   end
+
+  def self.add_availability_range(spaceid:, start_date:, end_date:)
+    (start_date..end_date).each do |date|
+      Space.add_availability(spaceid: spaceid, date: date)
+    end
+  end
 end
