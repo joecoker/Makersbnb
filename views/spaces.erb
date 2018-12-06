@@ -1,7 +1,21 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h1>Spaces</h1>
+<html> lang="en" dir="ltr">
+ <head>
+  <style>
+
+      div {
+          background-color: lightblue;
+          width: 300px;
+          border: 25px solid grey;
+          padding: 25px;
+          margin: 25px;
+      }
+      <title>MakersBnB</title>
+  </style>
+  <meta charset="utf-8">
+  <title>View Spaces</title>
+  </head>
+    <h1>Spaces</h1>
 <% @all_spaces.each do |space| %>
   <li>
     <a href='/space_profile/<%= space.id %>'>
@@ -12,6 +26,6 @@
   <a href='/create-a-space'>Create a space</a>
   <br>
 
-
-</body>
+    </head>
+  </body>
 </html>
