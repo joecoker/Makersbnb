@@ -9,7 +9,7 @@ describe Booking do
 
       expect(booking.start_date).to eq("2018-12-20")
       expect(booking.end_date).to eq("2018-12-23")
-      expect(booking.confirmed).to eq(false)
+      expect(booking.confirmed).to eq("f")
       expect(booking).to be_a Booking
     end
   end
