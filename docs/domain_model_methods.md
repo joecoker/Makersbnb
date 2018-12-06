@@ -23,7 +23,7 @@
 * add_availability
 * make_unavailable
 
-****Bookings****
+****Booking****
 * create_booking
 * check_availability
 * notify_owner
