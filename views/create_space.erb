@@ -1,32 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+
+  <style>
+    body {
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("/interior.jpeg");
+        font-family: "Verdana", sans-serif;
+      }
+
+    h1 {
+      color: white;
+      font-size: 75px;
+      text-align: center;
+    }
+
+    h2 {
+      color: white;
+      text-align: center;
+    }
+
+    div {
+      font-size: 20px;
+    }
+
+    input {
+      width: 20%;
+      text-align: center;
+      height: 30px;
+      margin-bottom: 4px;
+    }
+
+    form {
+      text-align: center;
+    }
+
+    p{
+      color: grey;
+    }
+
+    #publish-button{
+      
+    }
+
+  </style>
+
     <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="css/master.css">
     <title>MakersBnB</title>
   </head>
+
   <body>
-    <h1>Give your space a name, then click 'Publish my space'</h1>
-    <form action='/add-space' method='post'>
-      <p>
-        <input type='text' name='space_name' placeholder='My space is called...'>
-        Your space's name!
-      </p>
-      <p>
-        <input type='date' name='start_availability'>
-        The first date your space is available
-      </p>
-      <p>
-        <input type='date' name='end_availability'>
-        The last date your space is available
-      </p>
-      <p>
-        <input type='submit' value='Publish my space'>
-      </p>
-    </form>
     <% if @user %>
       <p>You are logged in as: <%= @user.username %></p>
     <% end %>
-    <br>
       <a href='/spaces'>View spaces</a>
+    <h1>Publish your space</h1>
+    <form action='/add-space' method='post'>
+      <p>
+        <input type='text' name='space_name' placeholder='My space is called...'>
+      </p>
+        <h2>Available from:</h2>
+        <input type='date' name='start_availability'>
+
+        <h2>to:</h2>
+        <input type='date' name='end_availability'>
+      <p>
+        <input type='submit' id="publish-button" value='Publish my space'>
+      </p>
+    </form>
+
   </body>
 </html>

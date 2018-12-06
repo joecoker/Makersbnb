@@ -21,7 +21,13 @@
       text-align: right;
       }
        body {
-      font-family: "Verdana", sans-serif; 
+      font-family: "Verdana", sans-serif;
+       }
+
+       .individual-comment{
+         border-left: 10px lightblue;
+         border-style: solid;
+         background-color: lightgray;
        }
 
     </style>
@@ -82,19 +88,25 @@
       </p>
     </div>
 
-    <div class="comments-list">
-      Previous comments
-      <ul>
+    <div class="">
+      <h2>Previous comments</h2>
+      <div class="comments-list">
+        <ul>
           <% @comments.each do |comment| %>
-          <li>
-            <%= comment[:comment_text] %>
-            <%="Made by " + comment[:username]%>
-          </li>
+              <div class="individual-comment">
+                <li>
+                  <%= comment[:comment_text] %>
+                  <br>                  
+                  <%="Made by " + comment[:username]%>
+                </li>
+                <br>
+              </div>
           <% end %>
         </ul>
+      </div>
     </div>
 
-    <form class="" action="/create_comment/<%= params['id'] %>" method="post">
+    <form class="new-comment" action="/create_comment/<%= params['id'] %>" method="post">
       <label for="">
         Make comment:
         <input type="text" name="comment_text" placeholder="Comment here">
