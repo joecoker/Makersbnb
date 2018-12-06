@@ -11,6 +11,8 @@ DEFAULT_AVAILABILITY = {
   date: '2019-02-27',
   formatted_date: '27/02/2019'
 }
+DEFAULT_START_AVAILABILITY = Date.new(2019, 04, 12)
+DEFAULT_END_AVAILABILITY = Date.new(2019, 04, 15)
 
 def set_up_database
   clear_database

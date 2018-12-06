@@ -21,6 +21,7 @@
 * update_space_details
 * view_availability
 * add_availability
+* add_availability_range
 * make_unavailable
 
 ****Bookings****

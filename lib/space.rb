@@ -44,11 +44,14 @@ class Space
   end
 
   def self.add_availability(spaceid:, date:)
-    puts 'in the model'
-    date = date.split '/'
-    date = date.reverse.join '-'
     DatabaseConnection.query "INSERT
       INTO availability (space, availabledate)
       VALUES ('#{spaceid}', '#{date}');"
+  end
+
+  def self.add_availability_range(spaceid:, start_date:, end_date:)
+    (start_date..end_date).each do |date|
+      Space.add_availability(spaceid: spaceid, date: date)
+    end
   end
 end
