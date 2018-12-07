@@ -1,7 +1,6 @@
 class Owner
   def self.list_booking_requests_by_owner(ownerid:)
-    result = DatabaseConnection.query("
-      SELECT spaces.spacename, bookings.*
+    DatabaseConnection.query("SELECT spaces.spacename, bookings.*
       FROM spaces
       INNER JOIN bookings
       ON spaces.id = bookings.spaceid
