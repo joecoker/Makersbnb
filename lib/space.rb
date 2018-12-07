@@ -49,4 +49,18 @@ class Space
       Space.add_availability(spaceid: spaceid, date: date)
     end
   end
+
+  def self.check_availability(spaceid:, date:)
+    result = DatabaseConnection.query("SELECT *
+      FROM availability
+      WHERE space = #{spaceid} and availabledate = '#{date}';")
+    result.ntuples > 0
+  end
+
+  def self.check_availability_range(spaceid:, start_date:, end_date:)
+    (start_date..end_date).each do |date|
+      return false unless Space.check_availability(spaceid: spaceid, date: date)
+    end
+    return true
+  end
 end

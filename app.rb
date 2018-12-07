@@ -83,6 +83,11 @@ class Makersbnb < Sinatra::Base
   end
 
   post '/create_booking/:id' do
+    raise 'Date range unavailable' unless Space.check_availability_range(
+      spaceid: params['id'],
+      start_date: params['start_date'],
+      end_date: params['end_date']
+    )
     Booking.create_booking(userid: session['user'].userid,
       spaceid: params['id'],
       start_date: params['start_date'],

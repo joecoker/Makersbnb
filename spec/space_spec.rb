@@ -86,4 +86,44 @@ describe 'Space' do
       end
     end
   end
+
+  describe '.check_availability' do
+    it 'checks a day to get back true when the date is available' do
+      expect(Space.check_availability(
+        spaceid: DEFAULT_SPACE[:id],
+        date: DEFAULT_AVAILABILITY[:date])
+      ).to be(true)
+    end
+
+    it 'checks an unavailable day and returns false' do
+      expect(Space.check_availability(
+        spaceid: DEFAULT_SPACE[:id],
+        date: '2017-02-02')
+      ).to be(false)
+    end
+  end
+
+  describe '.check_availability_range' do
+    it 'checks a range of available dates and returns true in the end' do
+      Space.add_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: DEFAULT_START_AVAILABILITY,
+        end_date: DEFAULT_END_AVAILABILITY
+      )
+
+      expect(Space.check_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: DEFAULT_START_AVAILABILITY,
+        end_date: DEFAULT_END_AVAILABILITY)
+      ).to be(true)
+    end
+
+    it 'checks a range of unavailable dates and returns false' do
+      expect(Space.check_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: DEFAULT_START_AVAILABILITY,
+        end_date: DEFAULT_END_AVAILABILITY)
+      ).to be(false)
+    end
+  end
 end
