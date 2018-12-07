@@ -76,7 +76,9 @@ class Space
   def self.check_availability(spaceid:, date:)
     result = DatabaseConnection.query("SELECT *
       FROM availability
-      WHERE space = #{spaceid} and availabledate = '#{date}';")
+      WHERE space = #{spaceid}
+      AND availabledate = '#{date}'
+      AND unavailable = FALSE;")
     result.ntuples > 0
   end
 

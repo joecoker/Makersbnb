@@ -96,7 +96,6 @@ class Makersbnb < Sinatra::Base
   end
 
   post '/make_unavailable' do
-    puts params
     date = Date.strptime(params[:date], '%d/%m/%Y')
     Space.make_unavailable(date: date, spaceid: params[:id])
     redirect "update_space/#{params[:id]}"
