@@ -1,9 +1,9 @@
 body {
   background-color: lightblue;
-  font-family: Helvetica;
   margin: 1em;
   padding: 1em;
 }
 
-/* to link a style sheet
-<link rel="stylesheet" href="route to file /master.css" */
+p {
+  color: blue;
+}
