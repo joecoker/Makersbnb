@@ -13,7 +13,7 @@ SECOND_DEFAULT_USER = {
   password: 'password'
 }
 DEFAULT_SPACE = { id: 0, spacename: 'Pickle Place' }
-DEFAULT_BOOKING ={
+DEFAULT_BOOKING = {
   id: 0,
   spaceid: DEFAULT_SPACE[:id],
   hirerid: SECOND_DEFAULT_USER[:id],

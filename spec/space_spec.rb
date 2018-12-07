@@ -14,8 +14,7 @@ describe 'Space' do
     it 'adds the space to the database' do
       Space.create_space(
         spacename: 'My House',
-        ownerid: DEFAULT_USER[:id]
-      )
+        ownerid: DEFAULT_USER[:id])
 
       list_of_spaces = Space.list_spaces
       my_house = list_of_spaces.find { |space|
@@ -29,8 +28,7 @@ describe 'Space' do
     it 'returns the details for a given space id' do
       my_house = Space.create_space(
         spacename: 'My House',
-        ownerid: DEFAULT_USER[:id]
-      )
+        ownerid: DEFAULT_USER[:id])
       house_details = Space.view_space_details(spaceid: my_house.id)
       expect(house_details[:spacename]).to eq 'My House'
     end
@@ -58,8 +56,7 @@ describe 'Space' do
       Space.add_availability_range(
         spaceid: DEFAULT_SPACE[:id],
         start_date: start_date,
-        end_date: end_date
-      )
+        end_date: end_date)
       (start_date..end_date).each do |date|
         day = date.day.to_s.rjust(2, "0")
         month = date.month.to_s.rjust(2, "0")
@@ -75,8 +72,7 @@ describe 'Space' do
       Space.add_availability_range(
         spaceid: DEFAULT_SPACE[:id],
         start_date: start_date,
-        end_date: end_date
-      )
+        end_date: end_date)
       (start_date..end_date).each do |date|
         day = date.day.to_s.rjust(2, "0")
         month = date.month.to_s.rjust(2, "0")
@@ -101,13 +97,11 @@ describe 'Space' do
       Space.add_availability_range(
         spaceid: DEFAULT_SPACE[:id],
         start_date: start_date,
-        end_date: end_date
-      )
+        end_date: end_date)
       Space.make_range_unavailable(
         spaceid: DEFAULT_SPACE[:id],
         start_date: start_date,
-        end_date: end_date
-      )
+        end_date: end_date)
       (start_date..end_date).each do |date|
         expect(Space.view_availability(spaceid: DEFAULT_SPACE[:id])).not_to include date
       end
@@ -118,6 +112,44 @@ describe 'Space' do
     it "return a list of all spaces an owner has" do
       spaces = Space.list_spaces_by_owner(ownerid: DEFAULT_USER[:id])
       expect(spaces[0].spacename).to eq DEFAULT_SPACE[:spacename]
+    end
+  end
+
+  describe '.check_availability' do
+    it 'checks a day to get back true when the date is available' do
+      expect(Space.check_availability(
+        spaceid: DEFAULT_SPACE[:id],
+        date: DEFAULT_AVAILABILITY[:date])
+      ).to be(true)
+    end
+
+    it 'checks an unavailable day and returns false' do
+      expect(Space.check_availability(
+        spaceid: DEFAULT_SPACE[:id],
+        date: '2017-02-02')
+      ).to be(false)
+    end
+  end
+
+  describe '.check_availability_range' do
+    it 'checks a range of available dates and returns true in the end' do
+      Space.add_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: DEFAULT_START_AVAILABILITY,
+        end_date: DEFAULT_END_AVAILABILITY)
+      expect(Space.check_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: DEFAULT_START_AVAILABILITY,
+        end_date: DEFAULT_END_AVAILABILITY)
+      ).to be(true)
+    end
+
+    it 'checks a range of unavailable dates and returns false' do
+      expect(Space.check_availability_range(
+        spaceid: DEFAULT_SPACE[:id],
+        start_date: DEFAULT_START_AVAILABILITY,
+        end_date: DEFAULT_END_AVAILABILITY)
+      ).to be(false)
     end
   end
 end
