@@ -27,7 +27,6 @@ describe Booking do
       expect(users_bookings.first.spaceid).to eq(booking.spaceid)
       expect(users_bookings.first.start_date).to eq(booking.start_date)
       expect(users_bookings.first.end_date).to eq(booking.end_date)
-
     end
   end
 end

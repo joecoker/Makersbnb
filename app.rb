@@ -82,6 +82,26 @@ class Makersbnb < Sinatra::Base
     redirect '/spaces'
   end
 
+  get '/update-a-space' do
+    @spaces = Space.list_spaces_by_owner(
+      ownerid: session['user'].userid
+    )
+    erb :owner_spaces_list
+  end
+
+  get '/update_space/:id' do
+    @space = Space.view_space_details(spaceid: params['id'])
+    @dates = Space.view_availability(spaceid: params['id'])
+    erb :update_space
+  end
+
+  post '/make_unavailable' do
+    puts params
+    date = Date.strptime(params[:date], '%d/%m/%Y')
+    Space.make_unavailable(date: date, spaceid: params[:id])
+    redirect "update_space/#{params[:id]}"
+  end
+
   post '/create_booking/:id' do
     raise 'Date range unavailable' unless Space.check_availability_range(
       spaceid: params['id'],
@@ -90,6 +110,11 @@ class Makersbnb < Sinatra::Base
     )
     Booking.create_booking(userid: session['user'].userid,
       spaceid: params['id'],
+      start_date: params['start_date'],
+      end_date: params['end_date']
+    )
+    Space.make_range_unavailable(
+      spaceid: params['id'] ,
       start_date: params['start_date'],
       end_date: params['end_date']
     )

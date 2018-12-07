@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style>
+      ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      }
+
+      li {
+      display: inline;
+      }
+
+      nav  {
+      background-color: #FFFFFF;
+      width: 100%;
+      height: 70px;
+      position: relative;
+      top:  0px;
+      text-align: right;
+      }
+       body {
+      font-family: "Verdana", sans-serif;
+       }
+
+    </style>
+
+    <meta charset="utf-8">
+    <title>Update space</title>
+  </head>
+  <nav>
+
+    <ul>
+      <li><a href='/spaces'>Home</a><li> &nbsp &nbsp
+      <li><a href='/create-a-space'>List a space</a></li> &nbsp &nbsp
+      <li><a href="requests">Requests</a></li> &nbsp &nbsp
+      <li><a href="signout">Sign out</a></li>
+    </ul>
+
+  </nav>
+  <img src="/modernhouse.jpeg" style="width: 500px; height: 500px; width: 100%">
+  <body>
+    <div class="spacename">
+      <h1>
+        <%= @space[:spacename] %>
+      </h1>
+    </div>
+  <br>
+    <div class="available-dates">
+      <p>
+        Available Dates
+        <ul>
+            <% @dates.each do |date| %>
+            <li>
+              <%= date %>
+              <form action='/make_unavailable' method=post>
+                <input type=hidden name='date' value=<%= date %>>
+                <input type=hidden name='id' value=<%= params[:id] %>>
+                <input type=submit value='Cancel'>
+              </form>
+            </li>
+            <% end %>
+          </ul>
+      </p>
+    </div>
+  </body>
+</html>
