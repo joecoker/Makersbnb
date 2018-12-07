@@ -32,7 +32,7 @@ class Space
     result = DatabaseConnection.query("SELECT
       to_char(availabledate, 'dd/mm/yyyy')
       FROM availability
-      WHERE space=#{spaceid} AND unavailable = FALSE;"
+      WHERE space=#{spaceid} AND unavailable = FALSE;")
     result.map do |availability|
       availability['to_char']
     end
